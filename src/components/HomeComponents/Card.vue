@@ -308,9 +308,9 @@ export default {
         });
       }
     },
-    Pagechange(index) {
+    Pagechange() {
       this.$store.commit('LoadingTitleChange', {isshow: true, title: '正在加载文章内容,请稍等...'})
-      PageSizeChange("/page/getnotePage", { page: index }).then(res => {
+      PageSizeChange("/api/articles").then(res => {
         if (res.data.err == 0) {
           this.count = res.data.message.count;
           this.lists = res.data.message.data;
