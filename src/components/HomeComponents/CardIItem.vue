@@ -41,7 +41,7 @@
 </template>
 <script>
   export default {
-    name:'carditem',
+    name:'card-item',
     props:{
       title:{
         type:String,default:'',required:true

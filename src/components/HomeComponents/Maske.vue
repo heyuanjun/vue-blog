@@ -6,6 +6,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import Center from "./Center";
 export default {
@@ -15,6 +16,7 @@ export default {
   }
 };
 </script>
+
 <style lang="scss" scoped>
 #Maske {
   position: absolute;

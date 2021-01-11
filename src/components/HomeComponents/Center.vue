@@ -9,12 +9,12 @@
                 <div class="side"></div>
             </div>
             <div class="text">
-                <div class="text--backing">CODELEI</div>
+                <div class="text--backing">OrangeSix</div>
                 <div class="text--left">
-                    <div class="inner">CODELEI</div>
+                    <div class="inner">OrangeSix</div>
                 </div>
                 <div class="text--right">
-                    <div class="inner">CODELEI</div>
+                    <div class="inner">OrangeSix</div>
                 </div>
             </div>
         </div>
@@ -38,11 +38,9 @@
     data () {
       return {
         navgation: [
-          {name: ' Login', icon: 'iconfont icon-touxiang', path: '/login'},
-          {name: ' Article-List', icon: 'iconfont icon-wenzhang', path: '/article'},
-          {name: ' Demo', icon: 'iconfont icon-anli', path: '/demo'},
-          {name: ' LeaveMessage', icon: 'iconfont icon-liuyan2', path: '/message'},
-          {name: ' Photos', icon: 'iconfont icon-xiangce', path: '/photos'},
+          {name: ' 文章', icon: 'iconfont icon-wenzhang', path: '/article'},
+          {name: ' 留言', icon: 'iconfont icon-liuyan2', path: '/message'},
+          {name: ' 相册', icon: 'iconfont icon-xiangce', path: '/photos'},
         ]
       };
     },

@@ -51,7 +51,7 @@
   </div>
 </template>
 <script>
-import { getnotedetail, PostMessage } from "../NetWork/request";
+import { getNoteDetail, PostMessage } from "../NetWork/request";
 import highlight from "highlight.js";
 import marked from "marked";
 import "highlight.js/styles/monokai-sublime.css";
@@ -101,7 +101,7 @@ export default {
   mounted() {
     this.lightEdite();
     this.$Spin.show();
-    getnotedetail(`/note/bynotetext/${this.$route.params.id}`).then(res => {
+    getNoteDetail(`/note/bynotetext/${this.$route.params.id}`).then(res => {
       const baseURL = res.data.message;
       this.html = marked(baseURL.content[0].content);
       this.share_brief = baseURL.content[0].article_brief;

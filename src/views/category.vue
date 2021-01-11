@@ -25,7 +25,7 @@
   </div>
 </template>
 <script>
-import { getnotedetail,PostMessage } from '../components/NetWork/request'
+import { getNoteDetail,PostMessage } from '../components/NetWork/request'
 import lables from '../components/categoryComponents/lables'
 import moment from 'moment'
   export default {
@@ -42,7 +42,7 @@ import moment from 'moment'
       }
     },
     mounted() {
-      getnotedetail('/note/getlables')
+      getNoteDetail('/note/getlables')
       .then(res => {
         if(res.data.err == 0) {
           var arr = []

@@ -79,7 +79,7 @@
               </div>
               <Tag
                 class="tag"
-                @click.native="getlableInfo(item)"
+                @click.native="getLabeLInfo(item)"
                 :color="bgColor[index]"
                 v-for="(item,index) in lablesList"
                 :key="index"
@@ -113,8 +113,9 @@
     </Row>
   </div>
 </template>
+
 <script>
-import { getnotedetail, PostMessage, PageSizeChange } from "../NetWork/request";
+import { getNoteDetail, PostMessage, PageSizeChange } from "../NetWork/request";
 import CardItem from "./CardIItem";
 import Music from "./Music";
 import myMakefriends from "./MyMakefriend";
@@ -171,10 +172,10 @@ export default {
   mounted() {
     /* 默认请求第一页 */
     this.Pagechange(1);
-    getnotedetail("/note/gettimenoteList").then(res => {
+    getNoteDetail("/note/gettimenoteList").then(res => {
       this.navList = res.data;
     });
-    this.getlables();
+    this.getLabels();
     this.getCategroys();
   },
   methods: {
@@ -202,8 +203,8 @@ export default {
       );
     },
     /* 获取标签 */
-    getlables() {
-      getnotedetail("/note/getlables").then(res => {
+    getLabels() {
+      getNoteDetail("/note/getLabels").then(res => {
         if (res.data.err == 0) {
           var arr = [];
           res.data.message.forEach(ele => {
@@ -214,9 +215,9 @@ export default {
       });
     },
     /* 获取标签详情 */
-    getlableInfo(lable) {
+    getLabeLInfo(lable) {
       this.$Spin.show();
-      PostMessage("/note/getlableInfo", { lable: lable })
+      PostMessage("/note/getLabeLInfo", { lable: lable })
         .then(res => {
           this.$Spin.hide();
           if (res.data.err == 0) {
@@ -234,7 +235,7 @@ export default {
     },
     /* 获取分类 */
     getCategroys() {
-      getnotedetail("/note/getcategroys")
+      getNoteDetail("/note/getcategroys")
         .then(res => {
           if (res.data.err === 0) {
             this.categroysList = res.data.message;
@@ -356,6 +357,7 @@ export default {
   }
 };
 </script>
+
 <style lang="scss" scoped>
 @font-face {
   font-family: "leileiFont";

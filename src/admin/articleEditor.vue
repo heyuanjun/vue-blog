@@ -50,7 +50,7 @@
   </div>
 </template>
 <script>
-import { getnotedetail } from '../components/NetWork/request'
+import { getNoteDetail } from '../components/NetWork/request'
   export default {
     name:'articleEditor',
     data() {
@@ -63,7 +63,7 @@ import { getnotedetail } from '../components/NetWork/request'
             this.ModelisShow = true
         },
         handelOK() {
-            getnotedetail('/user/adminExit').then(res => {
+            getNoteDetail('/user/adminExit').then(res => {
                 this.$Message.success(res.data.message);
                 location.reload()
             })

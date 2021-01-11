@@ -4,16 +4,35 @@
       <Icon type="md-ribbon"></Icon>当前位置: <router-link style="cursor:pointer" tag="span" to="/">首页</router-link> > 云相册
       </header>
         <div id="container">
-          <div class="card" v-for="(item, index) in talkdata" :key="index">
-            <img v-lazy="item.imgsrc">  
-            <p>{{item.content}}</p>
-            <p>{{item.datetime}}</p>
+          <!--<div class="card" v-for="(item, index) in talkdata" :key="index">-->
+          <!--  <img v-lazy="item.imgsrc">  -->
+          <!--  <p>{{item.content}}</p>-->
+          <!--  <p>{{item.datetime}}</p>-->
+          <!--</div>-->
+          <div class="card">
+            <img src="https://t7.baidu.com/it/u=3281686603,2838365105&fm=193&f=GIF">
+          </div>
+          <div class="card">
+            <img src="https://t7.baidu.com/it/u=60148754,2668908609&fm=193&f=GIF">
+          </div>
+          <div class="card">
+            <img src="https://t7.baidu.com/it/u=3912586182,1584802988&fm=193&f=GIF">
+          </div>
+          <div class="card">
+            <img src="https://t7.baidu.com/it/u=842714310,2416529807&fm=193&f=GIF">
+          </div>
+          <div class="card">
+            <img src="https://t7.baidu.com/it/u=1949258689,3948360660&fm=193&f=GIF">
+          </div>
+          <div class="card">
+            <img src="https://t7.baidu.com/it/u=1949258689,3948360660&fm=193&f=GIF">
           </div>
       </div>
   </div>
 </template>
+
 <script>
-import  { getnotedetail } from '../components/NetWork/request'
+import  { getNoteDetail } from '../components/NetWork/request'
   export default {
     name:'about',
     data() {
@@ -27,7 +46,7 @@ import  { getnotedetail } from '../components/NetWork/request'
       }
     },
     mounted() {
-      getnotedetail('/upload/gettalk')
+      getNoteDetail('/upload/gettalk')
       .then(res => {
         if(res.data.err === 0) {
             this.talkdata = res.data.data;
@@ -38,6 +57,7 @@ import  { getnotedetail } from '../components/NetWork/request'
     },
   }
 </script>
+
 <style lang="scss" scoped>
 #about {
   width: 90%;

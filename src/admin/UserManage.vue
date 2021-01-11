@@ -19,7 +19,7 @@
  </div>
 </template>
 <script>
-import { getnotedetail, PostMessage } from '../components/NetWork/request'
+import { getNoteDetail, PostMessage } from '../components/NetWork/request'
     export default {
         mounted() {
             this.getUserInfo()
@@ -62,7 +62,7 @@ import { getnotedetail, PostMessage } from '../components/NetWork/request'
         },
         methods: {
             getUserInfo() {
-                getnotedetail('/user/getUserInfo')
+                getNoteDetail('/user/getUserInfo')
                 .then(res => {
                     if(res.data.err === 0) {
                         this.data6 = res.data.message

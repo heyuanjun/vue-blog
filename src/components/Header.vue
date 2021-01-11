@@ -12,6 +12,7 @@
     </Row>
   </div>
 </template>
+
 <script>
 import TabbarLink from './HomeComponents/TabberLink'
 import LogoContent from './HomeComponents/LogoContent'

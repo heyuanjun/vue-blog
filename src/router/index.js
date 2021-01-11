@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { getnotedetail } from '../components/NetWork/request'
 
 Vue.use(VueRouter)
 
@@ -18,16 +17,6 @@ const routes = [
     path:'/message',
     name:'message',
     component:() => import('../views/LeaveMessage.vue')
-  },
-  {
-    path:'/login',
-    name:'login',
-    component:() => import('../views/Login.vue')
-  },
-  {
-    path:'/logined',
-    name:'logined',
-    component:() => import('../components/LoginComponents/Logined.vue')
   },
   {
     path:'/photos',
@@ -52,7 +41,7 @@ const routes = [
   {
     path:'/detail/:id',
     name:'detail',
-    component:() => import ('../components/HomeComponents/detail')
+    component:() => import ('../components/HomeComponents/detail.vue')
   },
   {
     path:'/admin/login',
@@ -127,34 +116,6 @@ router.beforeEach((to, from, next) => {
     // if (localStorage.getItem('username')) {
     //   router.replace({name: 'logined'})
     // }
-  }
-  next()
-})
-
-/* 管理系统守卫 */
-router.beforeEach((to, from, next) => {
-  if (to.path.includes("/admin/article")) {
-    getnotedetail('/user/adminIslogined').then(res => {
-      if (res.data.err === 0) {
-        next()
-      } else {
-        router.push({name: 'adminlogin'})
-      }
-    })
-  }
-  next()
-})
-
-// 已登陆状态
-router.beforeEach((to, from, next) => {
-  if (to.path.includes("/admin/login")) {
-    getnotedetail('/user/adminIslogined').then(res => {
-      if (res.data.err === 0) {
-        router.push({name: 'admin'})
-      } else {
-        router.push({name: 'adminlogin'})
-      }
-    })
   }
   next()
 })

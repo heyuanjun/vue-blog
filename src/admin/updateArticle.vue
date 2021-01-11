@@ -52,12 +52,12 @@
 </template>
 
 <script>
-import { PostMessage, getnotedetail } from "../components/NetWork/request";
+import { PostMessage, getNoteDetail } from "../components/NetWork/request";
 export default {
   name: "articlePublish",
   created() {
     const id = this.$route.params.id;
-    getnotedetail("/note/getArticleInfo/" + id).then((res) => {
+    getNoteDetail("/note/getArticleInfo/" + id).then((res) => {
       if (res.data.err == 0) {
         this.articleDate = res.data.message[0];
         this.$Message.success("文章信息提取完成!");

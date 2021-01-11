@@ -3,6 +3,7 @@
     <Maske />
   </div>
 </template>
+
 <script>
 import Maske from "../components/HomeComponents/Maske";
 export default {
@@ -12,6 +13,7 @@ export default {
   }
 };
 </script>
+
 <style lang="scss" scoped>
 #Home {
   width: 100%;

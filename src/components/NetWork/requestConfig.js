@@ -13,6 +13,7 @@ function requestConfig(path) {
     url: path,
   });
 }
+
 function PageConfig(path, parmas) {
   let instance = axios.create({
     baseURL: baseURL, // 换成你自己的后台地址
@@ -23,6 +24,7 @@ function PageConfig(path, parmas) {
     params: parmas,
   });
 }
+
 function PublishMessage(path, data) {
   let instance = axios.create({
     baseURL: baseURL,// 换成你自己后台地址
