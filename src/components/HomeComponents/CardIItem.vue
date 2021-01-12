@@ -33,12 +33,13 @@
             </div>
             <!-- 文章标签 -->
             <div class="tags">
-              <Tag color="cyan">{{categroy}}</Tag>
+              <Tag color="cyan">{{category}}</Tag>
               <Tag :color="bgColor[index]" v-for="(item,index) in lablesList" :key="index">{{item}}</Tag>
       </div>
     </Card>
   </div>
 </template>
+
 <script>
   export default {
     name:'card-item',
@@ -73,7 +74,7 @@
       lable:{
         type:String,default:''
       },
-      categroy:{
+      category:{
         type:String,default:''
       }
     },
@@ -121,6 +122,7 @@
   }
 
 </script>
+
 <style lang="scss" scoped>
   #carditem {
     display: flex;

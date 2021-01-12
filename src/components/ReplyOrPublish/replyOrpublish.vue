@@ -138,7 +138,7 @@ import moment from 'moment'
         publish() {
           if(localStorage.getItem("username")) {
              /* 如果 value不为空的话  */
-          if(this.value) {
+            if(this.value) {
             const username = localStorage.getItem('username');
             /* detail start */
             const article_id = this.$route.params.id;
@@ -168,18 +168,19 @@ import moment from 'moment'
               }
             })
           }
-          /* 如果为空我们就不发起请求 给用户提示不能为空 */
-          else {
-            this.$Message.error("小主信息不能为空哦,(ノへ￣、)！")
-          }
+            /* 如果为空我们就不发起请求 给用户提示不能为空 */
+            else {
+              this.$Message.error("小主信息不能为空哦,(ノへ￣、)！")
+            }
           } else {
-           this.$Message.error("请先去登陆再来留言哦,(ノへ￣、)！")
+            this.$Message.error("请先去登陆再来留言哦,(ノへ￣、)！")
           }
         },
     },
   }
 
 </script>
+
 <style lang='scss' scoped>
   .replayOrpublish {
         .btn {

@@ -10,7 +10,7 @@
             <Button type="error" size="small" @click="remove(index)">删除</Button>
         </template>
     </Table>
-    <Page :page-size="3" @on-change="Pagechange" style="margin-top:2rem" :total="count" show-total />
+    <Page :page-size="3" @on-change="PageChange" style="margin-top:2rem" :total="count" show-total />
  </div>
 </template>
 <script>
@@ -47,7 +47,7 @@ import { PageSizeChange } from '../components/NetWork/request'
             }
         },
         methods: {
-            Pagechange(index) {
+            PageChange(index) {
                 this.getPage(index)
             },
             getPage(index) {

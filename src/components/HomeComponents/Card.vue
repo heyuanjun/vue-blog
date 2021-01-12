@@ -22,7 +22,7 @@
               :time="item.time"
               :Itemimg="item.article_img"
               :lable="item.lable"
-              :categroy="item.article_categroy"
+              :category="item.article_category"
               :content="item.article_brief"
               :visited="item.visited"
               :like="item.like_Star"
@@ -37,7 +37,7 @@
               :page-size="4"
               class="page"
               v-show="pageShow"
-              @on-change="Pagechange"
+              @on-change="PageChange"
               show-total
             />
           </div>
@@ -52,22 +52,22 @@
               <button class="search-btn" @click="searchLike">search</button>
             </div>
             <!-- 分类区 -->
-            <div class="article-categroy">
+            <div class="article-category">
               <div class="title">
                 <Icon type="ios-aperture-outline" /> 文章分类
                 <span>more</span>
               </div>
-              <div class="categroy-item">
+              <div class="category-item">
                 <Badge
-                  :count="item['COUNT(article_categroy)']"
-                  :type="categroyColor[index]"
-                  v-for="(item, index) in categroysList"
+                  :count="item['COUNT(article_category)']"
+                  :type="categoryColor[index]"
+                  v-for="(item, index) in categorysList"
                   :key="index"
                 >
                   <p
-                    @click="getCategroyInfo(item.article_categroy)"
+                    @click="getCategoryInfo(item.article_category)"
                     class="demo-badge"
-                  >{{item.article_categroy}}</p>
+                  >{{item.article_category}}</p>
                 </Badge>
               </div>
             </div>
@@ -105,8 +105,6 @@
               </div>
             </div>
             <Music />
-            <!-- 交友信息区 -->
-            <my-makefriends style="margin-right: 1rem;" />
           </div>
         </div>
       </Col>
@@ -118,9 +116,9 @@
 import { getNoteDetail, PostMessage, PageSizeChange } from "../NetWork/request";
 import CardItem from "./CardIItem";
 import Music from "./Music";
-import myMakefriends from "./MyMakefriend";
 import moment from "moment";
 import debounce from "../debounce/debounce";
+
 export default {
   name: "card",
   data() {
@@ -135,7 +133,7 @@ export default {
       modal1: false,
       value: "",
       lablesList: [],
-      categroysList: [],
+      categorysList: [],
       likeSearch: "",
       bgColor: [
         "magenta",
@@ -151,7 +149,7 @@ export default {
         "volcano",
         "yellow"
       ],
-      categroyColor: [
+      categoryColor: [
         "primary",
         "success",
         "error",
@@ -163,7 +161,7 @@ export default {
       ]
     };
   },
-  components: { CardItem, myMakefriends, Music },
+  components: { CardItem, Music },
   filters: {
     dateFilter(V) {
       return moment(V).format("YYYY-MM-DD");
@@ -171,12 +169,12 @@ export default {
   },
   mounted() {
     /* 默认请求第一页 */
-    this.Pagechange(1);
+    this.PageChange(1);
     getNoteDetail("/note/gettimenoteList").then(res => {
       this.navList = res.data;
     });
     this.getLabels();
-    this.getCategroys();
+    this.getCategories();
   },
   methods: {
     /* 防抖 */
@@ -234,11 +232,11 @@ export default {
         });
     },
     /* 获取分类 */
-    getCategroys() {
-      getNoteDetail("/note/getcategroys")
+    getCategories() {
+      getNoteDetail("/api/getCategories")
         .then(res => {
           if (res.data.err === 0) {
-            this.categroysList = res.data.message;
+            this.categoriesList = res.data.message;
           } else {
             this.$Message.error(res.data.message);
           }
@@ -248,9 +246,9 @@ export default {
         });
     },
     /* 获取分类详情页 */
-    getCategroyInfo(categroy) {
+    getCategoryInfo(category) {
       this.$Spin.show();
-      PostMessage("/note/getManycategroys", { categroy })
+      PostMessage("/note/getManycategories", { category })
         .then(res => {
           this.$Spin.hide();
           if (res.data.err == 0) {
@@ -308,12 +306,14 @@ export default {
         });
       }
     },
-    Pagechange() {
+    PageChange() {
       this.$store.commit('LoadingTitleChange', {isshow: true, title: '正在加载文章内容,请稍等...'})
-      PageSizeChange("/api/articles").then(res => {
-        if (res.data.err == 0) {
-          this.count = res.data.message.count;
-          this.lists = res.data.message.data;
+      PageSizeChange("/api/articles", '').then(res => {
+        console.log(res)
+        if (res.data.data.length > 0) {
+          this.count = res.data.data.count;
+          this.lists = res.data.data;
+          console.log(this.lists)
         } else {
           this.$Message.error("网络出错了,(ノへ￣、)！");
         }
@@ -434,7 +434,7 @@ export default {
         }
       }
       .article-lable,
-      .article-categroy,
+      .article-category,
       .time-article {
         font-size: 14px;
         background: #fff;
@@ -466,7 +466,7 @@ export default {
           opacity: 0.8;
         }
       }
-      .article-categroy {
+      .article-category {
         .ivu-badge {
           border: 1px solid #ddd;
           border-radius: 5px;
@@ -477,7 +477,7 @@ export default {
         .ivu-badge:hover {
           opacity: 0.8;
         }
-        .categroy-item {
+        .category-item {
           margin-top: 0.8rem;
           .demo-badge {
             background: #fff;

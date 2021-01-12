@@ -1,18 +1,24 @@
 <template>
   <div id="message">
-    <marquee style="color:orange;" direction="left">
-      可以给博主大大提点建议他回来的时候就可以看见啦  (｡･∀･)ﾉﾞ嗨 ~
+    <marquee style="color:orange;"
+        direction="left">
+      大家好，欢迎留言 😊
     </marquee>
-        <replyOrpublish 
-        :messageData='arrMesasgeList' publishURL="/message/leavemessage"
+    <replyOrpublish
+        :messageData='arrMesasgeList'
+        publishURL="/message/leavemessage"
         replyURL='/message/replyInfo'
-        />
-        <Page class="page" :page-size="10" @on-change="Pagechange" :total="count" show-total />
+    />
+    <Page class="page"
+        :page-size="10"
+        @on-change="PageChange"
+        :total="count"
+        show-total/>
   </div>
 </template>
 
 <script>
-import { PageSizeChange } from '../components/NetWork/request'
+import { PageSizeChange } from '@/components/NetWork/request'
 import replyOrpublish from '../components/ReplyOrPublish/replyOrpublish'
   export default {
     name:'leaveMessage',
@@ -28,18 +34,17 @@ import replyOrpublish from '../components/ReplyOrPublish/replyOrpublish'
       };
     },
     mounted() {
-      this.Pagechange(1)
+      this.PageChange(1)
     },
     components:{ replyOrpublish },
     methods: {
-      Pagechange(index) {
+      PageChange() {
         /* 发起请求 */
         this.$store.commit('LoadingTitleChange', {isshow: true, title: '正在获取留言信息~'})
-        PageSizeChange('/page/pageSize',{page:index})
-        .then(res => {
-          if(res.data.err == 0) {
-            this.count = res.data.message.count
-            this.arrMesasgeList = res.data.message.data
+        PageSizeChange('/api/messages').then(res => {
+          if(res.data.data.length > 0) {
+            this.count = res.data.data.count
+            this.arrMesasgeList = res.data.data
             this.$Spin.hide()
           } else {
             this.$Message.error("网络出错了,(ノへ￣、)！")

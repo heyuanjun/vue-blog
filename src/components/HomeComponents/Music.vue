@@ -1,7 +1,7 @@
 <template>
   <div id="music_container">
-    <p><Icon type="ios-musical-notes" /> 音乐鉴赏</p>
-    <span class="introduce">谁还不是个优雅不失风度的人呢，看电脑累了吧，给你推荐一首好听的音乐，闭一下眼睛听首音乐放松放松吧。</span>
+    <p><Icon type="ios-musical-notes" /> 音乐。</p>
+    <span class="introduce">听歌。</span>
     <iframe
       frameborder="no"
       border="0"
@@ -32,7 +32,7 @@ export default {
 
   methods: {
     getMusic(id) {
-      getNoteDetail(`/music/getmusic/${id}`).then(res => {
+      getNoteDetail(`/api/musics/${id}`).then(res => {
         if (res.data.err == 0) {
           this.music_link = `//music.163.com/outchain/player?type=2&id=${res.data.data[0].music_id}&auto=0&height=66`;
           this.music_index = res.data.data[0].id;

@@ -16,7 +16,7 @@
         <p><i class="iconfont icon-lianjie"></i> 文章标签:</p>
         <Input v-model="articleDate.lable" style="width:200px" placeholder="文章标签" />
         <p><i class="iconfont icon-lianjie"></i> 文章分类:</p>
-        <Input v-model="articleDate.categroy" style="width:200px" placeholder="文章分类" />
+        <Input v-model="articleDate.category" style="width:200px" placeholder="文章分类" />
         <div class="event-Button">
             <Button @click.native="handelPublish" type="primary">发表</Button>
             <Button type="default">取消</Button>
@@ -37,7 +37,7 @@ import { PostMessage } from '../components/NetWork/request'
                 brief:'',
                 content:'',
                 lable:'',
-                categroy:''
+                category:''
           }
       }
     },
@@ -56,7 +56,7 @@ import { PostMessage } from '../components/NetWork/request'
                  !this.articleDate.content ||  
                  !this.articleDate.title ||  
                  !this.articleDate.brief ||  
-                 !this.articleDate.categroy ||
+                 !this.articleDate.category ||
                  !this.articleDate.lable 
             ) return this.$Message.error('请输入完整的文章信息!')
             const obj = this.articleDate

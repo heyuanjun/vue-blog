@@ -1,5 +1,5 @@
 <template>
-  <div id="categroy">
+  <div id="category">
     <h3>~点击已存在的标签搜索对应的内容~</h3>
     <div class="lables">
           <lables 
@@ -84,7 +84,7 @@ import moment from 'moment'
   }
 </script>
 <style lang="scss" scoped>
-#categroy {
+#category {
   margin: 0 auto;
     h3 {
       text-align: center;

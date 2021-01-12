@@ -14,14 +14,14 @@ function requestConfig(path) {
   });
 }
 
-function PageConfig(path, parmas) {
+function PageConfig(path, params) {
   let instance = axios.create({
     baseURL: baseURL, // 换成你自己的后台地址
     timeout: 10000,
   });
   return instance({
     url: path,
-    params: parmas,
+    params: params,
   });
 }
 

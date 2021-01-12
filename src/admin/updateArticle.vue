@@ -42,7 +42,7 @@
       <p>
         <i class="iconfont icon-lianjie"></i> 文章分类:
       </p>
-      <Input v-model="articleDate.article_categroy" style="width:200px" placeholder="文章分类" />
+      <Input v-model="articleDate.article_category" style="width:200px" placeholder="文章分类" />
       <div class="event-Button">
         <Button @click.native="handelPublish" type="primary">修改</Button>
         <Button @click.native="handelCancel">取消</Button>
