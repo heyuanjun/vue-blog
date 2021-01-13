@@ -34,7 +34,7 @@
             <!-- 文章标签 -->
             <div class="tags">
               <Tag color="cyan">{{category}}</Tag>
-              <Tag :color="bgColor[index]" v-for="(item,index) in lablesList" :key="index">{{item}}</Tag>
+              <Tag :color="bgColor[index]" v-for="(item,index) in labelsList" :key="index">{{item}}</Tag>
       </div>
     </Card>
   </div>
@@ -71,7 +71,7 @@
       accessPulish_count:{
         type:Number,default:0,required:true
       },
-      lable:{
+      label:{
         type:String,default:''
       },
       category:{
@@ -114,7 +114,7 @@
           return localStorage.getItem(`like${id}`) == id
         }
       },
-      lablesList() {
+      labelsList() {
       const regExep = /\w\w*/g
       return this.title.match(regExep)
     }

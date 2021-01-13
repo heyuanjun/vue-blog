@@ -14,6 +14,7 @@
     <i @click="getMusic(++music_index)" class="next_Button iconfont icon-icon-arrow-right2"></i>
   </div>
 </template>
+
 <script>
 import { getNoteDetail } from "../NetWork/request";
 export default {
@@ -21,7 +22,7 @@ export default {
   data() {
     return {
       music_link: "",
-      music_index: 9
+      music_index: 1
     };
   },
   mounted() {
@@ -32,10 +33,10 @@ export default {
 
   methods: {
     getMusic(id) {
-      getNoteDetail(`/api/musics/${id}`).then(res => {
-        if (res.data.err == 0) {
-          this.music_link = `//music.163.com/outchain/player?type=2&id=${res.data.data[0].music_id}&auto=0&height=66`;
-          this.music_index = res.data.data[0].id;
+      getNoteDetail(`/api/music/${id}`).then(res => {
+        if (res) {
+          this.music_link = `//music.163.com/outchain/player?type=2&id=${res.music_id}&auto=0&height=66`;
+          this.music_index = res.id;
         } else {
           this.$Message.error("网络出错了稍后重试吧!");
         }
@@ -44,6 +45,7 @@ export default {
   }
 };
 </script>
+
 <style lang="scss" scoped>
 #music_container {
   width: 100%;

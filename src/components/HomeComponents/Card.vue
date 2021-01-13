@@ -21,7 +21,7 @@
               :title="item.title"
               :time="item.time"
               :Itemimg="item.article_img"
-              :lable="item.lable"
+              :label="item.label"
               :category="item.article_category"
               :content="item.article_brief"
               :visited="item.visited"
@@ -61,7 +61,7 @@
                 <Badge
                   :count="item['COUNT(article_category)']"
                   :type="categoryColor[index]"
-                  v-for="(item, index) in categorysList"
+                  v-for="(item, index) in categoriesList"
                   :key="index"
                 >
                   <p
@@ -72,16 +72,16 @@
               </div>
             </div>
             <!-- 标签区 -->
-            <div class="article-lable">
+            <div class="article-label">
               <div class="title">
                 <Icon type="ios-keypad" /> 文章标签
                 <span>more</span>
               </div>
               <Tag
                 class="tag"
-                @click.native="getLabeLInfo(item)"
+                @click.native="getLabelInfo(item)"
                 :color="bgColor[index]"
-                v-for="(item,index) in lablesList"
+                v-for="(item,index) in labelsList"
                 :key="index"
               >{{item}}</Tag>
             </div>
@@ -104,7 +104,7 @@
                 </span>
               </div>
             </div>
-            <Music />
+            <!--<Music />-->
           </div>
         </div>
       </Col>
@@ -115,7 +115,7 @@
 <script>
 import { getNoteDetail, PostMessage, PageSizeChange } from "../NetWork/request";
 import CardItem from "./CardIItem";
-import Music from "./Music";
+// import Music from "./Music";
 import moment from "moment";
 import debounce from "../debounce/debounce";
 
@@ -132,8 +132,8 @@ export default {
       flag: false,
       modal1: false,
       value: "",
-      lablesList: [],
-      categorysList: [],
+      labelsList: [],
+      categoriesList: [],
       likeSearch: "",
       bgColor: [
         "magenta",
@@ -161,7 +161,7 @@ export default {
       ]
     };
   },
-  components: { CardItem, Music },
+  components: { CardItem },
   filters: {
     dateFilter(V) {
       return moment(V).format("YYYY-MM-DD");
@@ -170,8 +170,8 @@ export default {
   mounted() {
     /* 默认请求第一页 */
     this.PageChange(1);
-    getNoteDetail("/note/gettimenoteList").then(res => {
-      this.navList = res.data;
+    getNoteDetail("/api/articles/recent").then(res => {
+      this.navList = res.data.data;
     });
     this.getLabels();
     this.getCategories();
@@ -202,20 +202,20 @@ export default {
     },
     /* 获取标签 */
     getLabels() {
-      getNoteDetail("/note/getLabels").then(res => {
-        if (res.data.err == 0) {
-          var arr = [];
-          res.data.message.forEach(ele => {
-            arr.push(ele.lable);
+      getNoteDetail("/api/labels").then(res => {
+        if (res.data.data.length > 0) {
+          let arr = [];
+          res.data.data.forEach(ele => {
+            arr.push(ele.label);
           });
-          this.lablesList = new Set(arr);
+          this.labelsList = new Set(arr);
         }
       });
     },
     /* 获取标签详情 */
-    getLabeLInfo(lable) {
+    getLabelInfo(label) {
       this.$Spin.show();
-      PostMessage("/note/getLabeLInfo", { lable: lable })
+      PostMessage("/note/getLabelInfo", { label: label })
         .then(res => {
           this.$Spin.hide();
           if (res.data.err == 0) {
@@ -233,10 +233,10 @@ export default {
     },
     /* 获取分类 */
     getCategories() {
-      getNoteDetail("/api/getCategories")
+      getNoteDetail("/api/categories")
         .then(res => {
-          if (res.data.err === 0) {
-            this.categoriesList = res.data.message;
+          if (res.data.data.length > 0) {
+            this.categoriesList = res.data.data;
           } else {
             this.$Message.error(res.data.message);
           }
@@ -433,7 +433,7 @@ export default {
           font-size: 13px;
         }
       }
-      .article-lable,
+      .article-label,
       .article-category,
       .time-article {
         font-size: 14px;
