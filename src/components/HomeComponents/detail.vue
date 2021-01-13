@@ -101,14 +101,14 @@ export default {
   mounted() {
     this.lightEdite();
     this.$Spin.show();
-    getNoteDetail(`/note/bynotetext/${this.$route.params.id}`).then(res => {
-      const baseURL = res.data.message;
-      this.html = marked(baseURL.content[0].content);
-      this.share_brief = baseURL.content[0].article_brief;
-      this.share_img = baseURL.content[0].article_img;
-      this.title = baseURL.content[0].title;
-      this.time = baseURL.content[0].time;
-      this.arrMesasgeList = baseURL.data;
+    getNoteDetail(`/api/articles/${this.$route.params.id}/detail`).then(res => {
+      const data = res.data;
+      this.html = marked(data.content);
+      this.share_brief = data.article_brief;
+      this.share_img = data.article_img;
+      this.title = data.title;
+      this.time = data.time;
+      this.arrMesasgeList = data;
       this.$Spin.hide();
     });
   },

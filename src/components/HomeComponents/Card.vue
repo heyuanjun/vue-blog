@@ -180,15 +180,15 @@ export default {
     /* 防抖 */
     searchLike: debounce(function() {
       if (!this.likeSearch) return this.$Message.error("搜索内容不能为空的呀~");
-      this.likesearchTool();
+      this.searchContent();
     }, 800),
     // 搜索工具
-    likesearchTool() {
-      PostMessage("/note/like_article_search", { value: this.likeSearch }).then(
+    searchContent() {
+      PageSizeChange("/api/articles", { filter: this.likeSearch }).then(
         res => {
-          if (res.data.err === 0) {
-            this.lists = res.data.message;
-            this.count = res.data.message.length;
+          if (res.data.data.length > 0) {
+            this.lists = res.data.data;
+            this.count = res.data.data.total;
             if (this.count === 0) {
               this.$Message.success("暂时没有这个区域的内容,欢迎留言建议!");
             } else {
@@ -215,11 +215,11 @@ export default {
     /* 获取标签详情 */
     getLabelInfo(label) {
       this.$Spin.show();
-      PostMessage("/note/getLabelInfo", { label: label })
+      PostMessage("/api/labels/info", { label: label })
         .then(res => {
           this.$Spin.hide();
-          if (res.data.err == 0) {
-            this.lists = res.data.message;
+          if (res.data) {
+            this.lists = res.data;
             this.count = this.lists.length;
             this.pageShow = false;
             this.$Message.success("为您查找到左侧内容!");
@@ -248,11 +248,11 @@ export default {
     /* 获取分类详情页 */
     getCategoryInfo(category) {
       this.$Spin.show();
-      PostMessage("/note/getManycategories", { category })
+      PostMessage("/api/categories/many", { category })
         .then(res => {
           this.$Spin.hide();
-          if (res.data.err == 0) {
-            this.lists = res.data.message;
+          if (res.data) {
+            this.lists = res.data;
             this.count = this.lists.length;
             this.pageShow = false;
             this.$Message.success("为您查找到左侧内容!");
@@ -309,7 +309,6 @@ export default {
     PageChange() {
       this.$store.commit('LoadingTitleChange', {isshow: true, title: '正在加载文章内容,请稍等...'})
       PageSizeChange("/api/articles", '').then(res => {
-        console.log(res)
         if (res.data.data.length > 0) {
           this.count = res.data.data.count;
           this.lists = res.data.data;

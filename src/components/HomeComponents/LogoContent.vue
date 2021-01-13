@@ -37,8 +37,8 @@ export default {
       font-family: "../../assets/font/Oh-Chewy-2.ttf";
     }
     img {
-      width: 3.5rem;
-      height: 3.5rem;
+      width: 2.9rem;
+      height: 2.5rem;
       margin-top: -2.2rem;
       -webkit-touch-callout: none;
       -webkit-user-select: none;
