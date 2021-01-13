@@ -6,7 +6,7 @@
     </marquee>
     <replyOrpublish
         :messageData='arrMesasgeList'
-        publishURL="/message/leavemessage"
+        publishURL="/api/messages/leave"
         replyURL='/message/replyInfo'
     />
     <Page class="page"

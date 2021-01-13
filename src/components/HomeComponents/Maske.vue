@@ -36,9 +36,12 @@ export default {
     width: 100%;
     height: 100vh;
     animation: linears 15s infinite;
-    background:linear-gradient(125deg,#2980b9,#633bd3,
-   #8e44ad,#192f44,#27ae60,);
-    background-size:800%;
+   // background:linear-gradient(125deg,#2980b9,#633bd3,
+   //#8e44ad,#192f44,#27ae60);
+   // background-size:800%;
+    background-image: url("../../../src/assets/images/60.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     z-index: -99;
   }
   // .bg::after {
