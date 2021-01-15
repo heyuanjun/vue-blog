@@ -2,9 +2,11 @@
   <div id="logo_content">
     <div class="logo_name">
       <i class="menu iconfont icon-caidan"></i>
-      <img v-show="$route.name !== 'home'" src="../../assets/images/cat.png"/>
+      <img v-show="$route.name !== 'home'"
+          src="../../assets/images/cat.png"/>
       <p v-show="$route.name !== 'home'">Orange Six</p>
-      <i @click="$router.push('/category')" class="search iconfont icon-search"></i>
+      <i @click="$router.push('/category')"
+          class="search iconfont icon-search"></i>
     </div>
   </div>
 </template>
@@ -15,11 +17,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss"
+    scoped>
 @font-face {
   font-family: "../../assets/font/Oh-Chewy-2.ttf";
   src: url("../../assets/font/Oh-Chewy-2.ttf");
 }
+
 #logo_content {
   .logo_name {
     display: flex;
@@ -28,14 +32,15 @@ export default {
     padding-top: 0.8rem;
     position: relative;
     user-select: none;
+
     p {
       font-size: 1.2rem;
       margin-bottom: 2rem;
-      // font-weight: bold;
-      color: lightgreen;
+      color: #ee9090;
       animation: triggerColor 7s infinite alternate;
       font-family: "../../assets/font/Oh-Chewy-2.ttf";
     }
+
     img {
       width: 2.9rem;
       height: 2.5rem;
@@ -49,12 +54,14 @@ export default {
       opacity: .9;
     }
   }
-  @media screen and(max-width:992px) {
+
+  @media screen and(max-width: 992px) {
     .menu,
     .search {
       display: block !important;
     }
   }
+
   .menu,
   .search {
     position: absolute;
@@ -64,12 +71,15 @@ export default {
     display: none;
     top: 0.4rem;
   }
+
   .menu {
     left: 2rem;
   }
+
   .search {
     right: 2rem;
   }
+
   .menu:hover,
   .search:hover {
     color: rgb(100, 177, 240);

@@ -158,7 +158,7 @@ export default {
           })
     },
     publish() {
-      const username = localStorage.getItem("username") ?? '游客';
+      const username = localStorage.getItem("username") ?? '匿名';
       if (username) {
         /* 如果 value不为空的话  */
         if (this.value) {
