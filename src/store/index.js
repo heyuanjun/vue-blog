@@ -1,16 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+// 挂载Vuex
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+// 创建VueX对象
+const store = new Vuex.Store({
     state: {
         isshow: false,
         fontColor: false,
         Color: '#333',
         LoadingShow: false,
         LoadingTitle: '正在加载请稍后...',
-        baseURL: 'http://www.blog-api.com'
+        baseURL: 'http://www.blog-api.com',
     },
     mutations: {
         updateShow(state, data) {
@@ -26,3 +28,5 @@ export default new Vuex.Store({
         }
     }
 })
+
+export default store;

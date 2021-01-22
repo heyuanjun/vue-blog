@@ -57,7 +57,7 @@
             </a>
           </div>
           <span>您可以选择以上几种方式登陆您的账户!</span>
-          <input v-model="user"
+          <input v-model="email"
               type="text"
               placeholder="用户名"/>
           <input v-model="pass"
@@ -101,34 +101,37 @@ export default {
   data() {
     return {
       isTransform: false,
-      user: "",
+      email: "",
       pass: "",
     };
   },
   methods: {
     adminSignUp() {
-      this.isTransform = true;
+      this.$Message.error("暂不开放注册 ^_^!");
+      // this.isTransform = true;
     },
     adminSignIn() {
       this.isTransform = false;
     },
     handleLogin() {
-      if (!this.pass || !this.user) {
-        this.$Message.error("请输入用户名和密码!");
+      if (!this.pass || !this.email) {
+        this.$Message.error("请输入邮箱和密码!");
       } else {
-        PostMessage("/admin/login", {
-          username: this.user,
-          password: this.pass,
-        }).then((res) => {
-          if (res.data.err === 0) {
-            this.$router.replace("/admin/article");
-            this.$Message.success(res.data.message);
-          } else if (res.data.err === -998) {
-            this.$Message.error(res.data.message);
-          } else {
-            this.$Message.error(res.data.message);
-          }
-        });
+        PostMessage("/admin/login", {email: this.email, password: this.pass,})
+          .then(res => {
+            console.log(res)
+            if (res.status === 200) {
+              this.$router.replace("/admin/article");
+              this.$Message.success(res.statusText);
+            } else {
+              this.$Message.error(res.statusText);
+            }
+          })
+          .catch(err => {
+            const response = err.response.data;
+            console.log(response)
+            this.$Message.error(response.message || '登录失败')
+          })
       }
     },
   },

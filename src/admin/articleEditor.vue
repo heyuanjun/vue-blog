@@ -26,7 +26,6 @@
                     </template>
                     <MenuItem @click.native="$router.push('/admin/article/upload/photos')" name="3-1">上传相册</MenuItem>
                     <MenuItem @click.native="$router.push('/admin/article/upload/images')" name="3-2">上传图片</MenuItem>
-                    <MenuItem @click.native="$router.push('/admin/article/upload/demo')" name="3-3">发表Demo</MenuItem>
                 </Submenu>
                 <Submenu  name="4">
                     <template slot="title">

@@ -61,11 +61,6 @@ const adminRotes = [
     component: () => import ('../admin/articleEditor.vue'),
     children: [
       {
-        path: '/admin/article/upload/demo',
-        name: 'sendDemo',
-        component: () => import('../admin/sendDemo.vue')
-      },
-      {
         path: '/admin/article/upload/photos',
         name: 'uploadphoto',
         component: () => import ('../admin/sendcontent.vue')

@@ -1,5 +1,6 @@
 import axios from "axios";
 import store from '../../store/index'
+
 const baseURL = store.state.baseURL;
 
 axios.defaults.withCredentials = true;
@@ -36,4 +37,4 @@ function PublishMessage(path, data) {
   });
 }
 
-export { requestConfig, PublishMessage, PageConfig };
+export {requestConfig, PublishMessage, PageConfig};
