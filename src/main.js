@@ -18,6 +18,7 @@ Vue.use(Vuelazyload,{
   loading:'./assets/images/loading.png'
 })
 Vue.prototype.bus = new Vue()
+
 new Vue({
   router,
   store,

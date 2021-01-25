@@ -45,7 +45,7 @@ let routes = [
   },
 ]
 
-const adminRotes = [
+let adminRotes = [
   {
     path: '/admin',
     redirect: '/admin/login'
