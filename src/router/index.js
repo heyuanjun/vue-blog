@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 let routes = [
   {
-    path: '/',
+    path: '*',
     redirect: '/home'
   },
   {
@@ -45,7 +45,7 @@ let routes = [
   },
 ]
 
-let adminRotes = [
+let adminRoutes = [
   {
     path: '/admin',
     redirect: '/admin/login'
@@ -94,13 +94,20 @@ let adminRotes = [
   }
 ]
 
-routes = routes.concat(adminRotes)
+routes = routes.concat(adminRoutes)
 
 const router = new VueRouter({
   /* 路由不再显示 hash */
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+const adminRouter = new VueRouter({
+  /* 路由不再显示 hash */
+  mode: 'history',
+  base: process.env.BASE_URL,
+  adminRoutes
 })
 
 /* 重定向不报错 */
@@ -110,18 +117,26 @@ VueRouter.prototype.push = function push(location) {
 }
 
 /*
-* 全局导航守卫
+* Admin 导航守卫
 * to: 即将要进入的目标 路由对象;（这个对象中包含name，params，meta等属性）
 * from: 当前导航正要离开的路由对象；（这个对象中包含name，params，meta等属性）
 * next: Function: 确保要调用 next 方法，否则钩子就不会被 resolved。
 */
-router.beforeEach((to, from, next) => {
-  if (to.path == "/login") {
-    // if (localStorage.getItem('username')) {
-    //   router.replace({name: 'logined'})
-    // }
+adminRouter.beforeEach((to, from, next) => {
+  console.log(to.path)
+  if (to.path === '/admin') {
+    next();
+  } else {
+    let token = localStorage.getItem('Authorization');
+
+    if (token === null || token === '') {
+      next('/admin');
+    } else {
+      next();
+    }
   }
-  next()
-})
+
+});
+
 
 export default router

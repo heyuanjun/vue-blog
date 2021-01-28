@@ -13,8 +13,15 @@ const store = new Vuex.Store({
         LoadingShow: false,
         LoadingTitle: '正在加载请稍后...',
         baseURL: 'http://www.blog-api.com',
+        // 存储token
+        Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : ''
     },
     mutations: {
+        // 修改token，并将token存入localStorage
+        changeLogin (state, user) {
+            state.Authorization = user.Authorization;
+            localStorage.setItem('Authorization', user.Authorization);
+        },
         updateShow(state, data) {
             state.isshow = data
         },

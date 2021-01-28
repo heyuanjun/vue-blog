@@ -95,6 +95,7 @@
 
 <script>
 import {PostMessage} from "@/components/NetWork/request";
+import {mapMutations} from "vuex";
 
 export default {
   name: "adminLogin",
@@ -106,6 +107,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(['changeLogin']),
     adminSignUp() {
       this.$Message.error("暂不开放注册 ^_^!");
       // this.isTransform = true;
@@ -118,20 +120,23 @@ export default {
         this.$Message.error("请输入邮箱和密码!");
       } else {
         PostMessage("/admin/login", {email: this.email, password: this.pass,})
-          .then(res => {
-            console.log(res)
-            if (res.status === 200) {
-              this.$router.replace("/admin/article");
-              this.$Message.success(res.statusText);
-            } else {
-              this.$Message.error(res.statusText);
-            }
-          })
-          .catch(err => {
-            const response = err.response.data;
-            console.log(response)
-            this.$Message.error(response.message || '登录失败')
-          })
+            .then(res => {
+              if (res.status === 200) {
+                this.userToken = 'Bearer ' + res.data.access_token;
+                console.log(this.userToken);
+                // 将用户token保存到vuex中
+                this.changeLogin({ Authorization: this.userToken });
+                this.$router.replace("/admin/article");
+                this.$Message.success(res.statusText);
+              } else {
+                this.$Message.error(res.statusText);
+              }
+            })
+            .catch(err => {
+              const response = err.response.data;
+              console.log(response)
+              this.$Message.error(response.message || '登录失败')
+            })
       }
     },
   },
