@@ -37,4 +37,30 @@ function PublishMessage(path, data) {
   });
 }
 
-export {requestConfig, PublishMessage, PageConfig};
+function AxiosRequest(path, params = {}, method = 'get') {
+  let instance = axios.create({
+    baseURL: baseURL, // 换成你自己的后台地址
+    headers: {
+      Authorization: localStorage.getItem('Authorization')
+    },
+    timeout: 10000,
+  });
+
+  switch (method) {
+    case 'get':
+      return instance({
+        url: path,
+        params: params,
+      });
+    case 'post':
+      return instance({
+        url: path,
+        method: "post",
+        data: params
+      });
+  }
+
+
+}
+
+export {requestConfig, PublishMessage, PageConfig, AxiosRequest};

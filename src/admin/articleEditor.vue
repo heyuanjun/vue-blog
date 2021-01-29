@@ -53,8 +53,8 @@
     <Modal
         v-model="ModelisShow"
         title="退出确认"
-        @on-ok="handelOK">
-      <p>确定要退出博客管理系统吗？</p>
+        @on-ok="handleLoginOut">
+      <p>尊敬的主人，您要退出了吗？</p>
     </Modal>
     <div class="childrenRouter">
       <router-view/>
@@ -76,7 +76,7 @@ export default {
     exitSys() {
       this.ModelisShow = true
     },
-    handelOK() {
+    handleLoginOut() {
       getNoteDetail('/user/adminExit').then(res => {
         this.$Message.success(res.data.message);
         location.reload()

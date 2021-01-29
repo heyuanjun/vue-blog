@@ -10,7 +10,9 @@ import './assets/iconfont4/iconfont.css'
 import './assets/iconfont5/iconfont.css'
 import  './components/HomeComponents/clicklove/clicklove'
 import Vuelazyload from 'vue-lazyload'
+import layer from 'vue-layer'
 
+Vue.prototype.$layer = layer(Vue);
 Vue.config.productionTip = false
 
 // 图片懒加载
