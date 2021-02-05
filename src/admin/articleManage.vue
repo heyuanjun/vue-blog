@@ -8,12 +8,12 @@
           slot="title">
         <strong>{{ row.title }}</strong>
       </template>
-      <template slot-scope="{ row, index }"
+      <template slot-scope="{ row }"
           slot="action">
         <Button type="primary"
             size="small"
             style="margin-right: 5px"
-            @click="show(index)">修改
+            @click="show(row.id)">修改
         </Button>
         <Button type="error"
             size="small"
@@ -21,7 +21,7 @@
         </Button>
       </template>
     </Table>
-    <Page :page-size="3"
+    <Page :page-size="15"
         @on-change="PageChange"
         style="margin-top:2rem"
         :total="count"
@@ -52,7 +52,7 @@ export default {
         },
         {
           title: '文章分类',
-          key: 'lable'
+          key: 'label'
         },
         {
           title: 'Action',
@@ -68,25 +68,24 @@ export default {
     PageChange(index) {
       this.getPage(index)
     },
-    getPage() {
-      HttpRequest("/admin/articles").then(res => {
+    getPage(index) {
+      HttpRequest("/admin/articles", {page: index}).then(res => {
         if (res.data.data.length > 0) {
-          this.count = res.data.data.count;
+          this.count = res.data.total;
           this.lists = res.data.data;
-          console.log(this.lists)
         } else {
           this.$Message.error("网络出错了,(ノへ￣、)！");
         }
         this.$store.commit('LoadingTitleChange', {isshow: false, title: ''})
       });
     },
-    show(index) {
-      this.$router.push('/admin/article/upload/articleupdate/' + this.lists[index].article_id)
+    show(id) {
+      this.$router.push('/admin/article/upload/articleupdate/' + id)
     },
     remove(id) {
       HttpRequest(`/admin/articles/${id}/delete`, {}, 'post').then(res => {
-        if (res) {
-          this.$Message.error(res.title + '删除成功');
+        if (res.data) {
+          this.$Message.error(res.data.title + '删除成功');
           location.reload();
         } else {
           this.$Message.error("删除失败");

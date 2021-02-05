@@ -43,7 +43,7 @@
       <p>
         <i class="iconfont icon-lianjie"></i> 文章标签:
       </p>
-      <Input v-model="articleData.lable"
+      <Input v-model="articleData.label"
           style="width:200px"
           placeholder="文章标签"/>
       <p>
@@ -94,16 +94,21 @@ export default {
     },
     handlePublish() {
       let _article = this.articleData;
-      if (!(_article.article_img && _article.content && _article.title && _article.article_brief && _article.lable)
-      ) {
-        return this.$Message.error("请输入完整的文章信息!");
-      }
+      // if (!(_article.article_img && _article.content && _article.title && _article.article_brief && _article.label)
+      // ) {
+      //   return this.$Message.error("请输入完整的文章信息!");
+      // }
 
-      HttpRequest("/note/editorArticle", this.articleData).then((res) => {
-        if (res.data.err == 0) {
-          this.$Message.success(res.data.message);
+      let params = this.articleData
+      const path = this.articleData.label + Math.floor(Math.random() * 2000000)
+      params.articlePath = path
+      HttpRequest('/admin/articles/write', params, 'post').then((res) => {
+        console.log(res)
+        if (res.data) {
+          this.$Message.success(res.statusText)
+          this.$router.replace('/admin/article/upload/articleManage')
         } else {
-          this.$Message.error(res.data.message);
+          this.$Message.error(res.statusText)
         }
       });
     },
