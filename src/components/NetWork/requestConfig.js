@@ -43,6 +43,10 @@ function AxiosRequest(path, params = {}, method = 'get') {
     headers: {
       Authorization: localStorage.getItem('Authorization')
     },
+    transformRequest: [function(data) {
+      data = JSON.stringify(data)
+      return data
+    }],
     timeout: 10000,
   });
 
