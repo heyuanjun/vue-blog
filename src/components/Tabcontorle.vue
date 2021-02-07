@@ -10,13 +10,13 @@
               <i class="iconfont icon-weixin">: x972761675</i>
               </ListItem>
             <ListItem>
-              <i @click="$router.push('/home')" class="iconfont icon-shouyex"> 首页</i>
+              <i @click="$router.push('/home')" class="iconfont icon-shouyex"> HOME</i>
             </ListItem>
             <ListItem>
               <i @click="$router.push('/demo')" class="iconfont icon--"> Demo</i>
             </ListItem>
             <ListItem>
-              <i @click="$router.push('/photos')" class="iconfont icon-biaoti"> 云相册</i>
+              <i @click="$router.push('/photos')" class="iconfont icon-biaoti"> 时光轴</i>
             </ListItem>
             <ListItem>
               <i @click="$router.push('/message')" class="iconfont icon-liuyan2"> 留言板</i>

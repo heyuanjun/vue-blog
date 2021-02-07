@@ -24,11 +24,6 @@ let routes = [
     component: () => import('../views/Photos.vue')
   },
   {
-    path: '/profile',
-    name: 'profile',
-    component: () => import('../views/Profile.vue')
-  },
-  {
     path: '/category',
     name: 'category',
     component: () => import('../views/category.vue')

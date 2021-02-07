@@ -13,23 +13,18 @@
       return {
         LinkList: [
           {
-            name: "首页",
+            name: "HOME",
             imageURL: "md-home",
             path: '/'},
           {
-            name: "文章列表",
+            name: "简记",
             imageURL: 'ios-bookmarks-outline',
             path: '/article'
           },
           {
-            name: "云相册",
+            name: "时光轴",
             imageURL: 'md-images',
             path: '/photos'
-          },
-          {
-            name: "个人信息",
-            imageURL: 'md-person',
-            path: '/profile'
           },
           {
             name: "留言板",
@@ -71,9 +66,10 @@
   height: 3rem;
   justify-content: center;
   align-items: center;
+  margin-top: 0.8rem;
   a {
     font-family: '微软雅黑';
-    color: #f2f2f2;
+    color: #666;
     margin: 0 1rem;
     padding: .3rem;
     font-size: 13px;
@@ -82,7 +78,7 @@
   a:hover {
     background: #222;
     border-radius: 5px;
-    color: lightgreen;
+    color: #fff;
   }
 }
 </style>

@@ -85,11 +85,11 @@ body, html {
   }
 
   .night {
-    background: url('../assets/images/night.gif') center;
+    //background: url('../assets/images/night.gif') center;
   }
 
   .moon {
-    background: url('../assets/images/light.jpg') center;
+    //background: url('../assets/images/light.jpg') center;
   }
 
   .router_content {
@@ -108,7 +108,6 @@ body, html {
   .active,
   .current {
     position: sticky;
-    background: linear-gradient(#333, #456);
     animation: animate 1s;
   }
 

@@ -29,14 +29,14 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 0.8rem;
+    margin-top: 1.5rem;
     position: relative;
     user-select: none;
 
     p {
       font-size: 1.2rem;
       margin-bottom: 2rem;
-      color: #ee9090;
+      color: #666;
       animation: triggerColor 7s infinite alternate;
       font-family: "../../assets/font/Oh-Chewy-2.ttf";
     }
