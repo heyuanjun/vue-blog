@@ -29,10 +29,10 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1.5rem;
+    padding-top: 1.5rem;
     position: relative;
     user-select: none;
-
+    //background: linear-gradient(#f6f5f5, #e8eef5);
     p {
       font-size: 1.2rem;
       margin-bottom: 2rem;

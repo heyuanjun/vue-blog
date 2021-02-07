@@ -1,7 +1,7 @@
 <template>
   <div v-show="$route.path !== '/home'" id="footer">
     <div class="talk">
-       <p><img src="../assets/images/beianicon.png" alt=""></p>
+       <!--<p><img src="../assets/images/beianicon.png" alt=""></p>-->
     </div>
   </div>
 </template>
@@ -19,7 +19,7 @@
 
 <style lang="scss" scoped>
 #footer {
-  background: linear-gradient(#333, #456);
+  background: linear-gradient(#fff, #e7e5e5);
   padding: 2rem 0;
   width: 100vw;
   margin-top: 2rem;

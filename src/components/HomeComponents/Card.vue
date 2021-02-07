@@ -49,7 +49,7 @@
             <!-- 搜索框区 -->
             <div class="search">
               <input placeholder="输入文章关键词搜索.." type="text" v-model="likeSearch" />
-              <button class="search-btn" @click="searchLike">search</button>
+              <button class="search-btn" @click="searchLike">Search</button>
             </div>
             <!-- 分类区 -->
             <div class="article-category">
@@ -373,7 +373,6 @@ export default {
       font-size: 15px;
       padding: 0.5rem;
       border: 1px solid #ccc;
-      border-bottom: 1.5px solid lightseagreen;
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
       .article-num {
@@ -426,9 +425,9 @@ export default {
           width: 24%;
           border-top-right-radius: 5px;
           border-bottom-right-radius: 5px;
-          background: deepskyblue;
-          color: white;
-          height: 32px;
+          background: #ebebeb;
+          color: #5e5e5e;
+          height: 30.5px;
           font-size: 13px;
         }
       }
@@ -439,17 +438,17 @@ export default {
         background: #fff;
         border: 1px solid #ccc;
         border-radius: 5px;
-        border-radius: 5px;
         margin-bottom: 1rem;
         .title {
           line-height: 20px;
           padding: 0.5rem;
-          border-bottom: 1.5px solid lightseagreen;
+          border-bottom: 1.5px solid #5e5e5e;
           span {
             display: block;
             float: right;
-            color: rgb(96, 96, 248);
+            color: #eee;
             font-size: 13px;
+            font-weight: bold;
             cursor: pointer;
           }
           span:hover {
