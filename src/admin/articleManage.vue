@@ -1,6 +1,6 @@
 <template>
   <div class="articleManage">
-    <h2>文章列表详情信息：</h2>
+    <h2>简记详情：</h2>
     <Table border
         :columns="columns12"
         :data="lists">

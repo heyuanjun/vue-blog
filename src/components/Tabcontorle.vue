@@ -25,7 +25,7 @@
           <i @click="Gogithub"><Icon style="margin-left:0" type="logo-github"/> Github</i>
           </ListItem>
             <ListItem>
-              <i @click="$router.push('/article')" class="iconfont icon-wenzhang"> 文章列表</i>
+              <i @click="$router.push('/article')" class="iconfont icon-wenzhang"> 简记</i>
             </ListItem>
             <ListItem>
               <i @click="$router.push('/profile')" class="iconfont icon-touxiang"> 个人信息</i>

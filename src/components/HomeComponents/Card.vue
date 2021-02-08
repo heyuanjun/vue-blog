@@ -7,7 +7,7 @@
       <Col :xl="12" :lg="13" :md="12" :sm="12" :xs="24">
         <div class="article-box">
           <div class="article-category">
-            <Icon type="ios-bookmarks-outline" />文章列表
+            <Icon type="ios-bookmarks-outline" /> 简记
             <div class="article-num">
               共
               <span>{{count}}</span> 篇
@@ -446,7 +446,7 @@ export default {
           span {
             display: block;
             float: right;
-            color: #eee;
+            color: #5e5e5e;
             font-size: 13px;
             font-weight: bold;
             cursor: pointer;

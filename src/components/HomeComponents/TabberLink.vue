@@ -71,9 +71,10 @@
     font-family: '微软雅黑';
     color: #666;
     margin: 0 1rem;
-    padding: .3rem;
+    padding: 0.3rem;
     font-size: 13px;
     transition: all .5s;
+    line-height: 1rem;
   }
   a:hover {
     background: #222;
