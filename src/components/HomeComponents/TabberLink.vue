@@ -15,7 +15,8 @@
           {
             name: "HOME",
             imageURL: "md-home",
-            path: '/'},
+            path: '/'
+          },
           {
             name: "简记",
             imageURL: 'ios-bookmarks-outline',

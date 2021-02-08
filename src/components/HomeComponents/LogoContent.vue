@@ -1,13 +1,15 @@
 <template>
   <div id="logo_content">
-    <div class="logo_name">
-      <i class="menu iconfont icon-caidan"></i>
-      <img v-show="$route.name !== 'home'"
-          src="../../assets/images/cat.png"/>
-      <p v-show="$route.name !== 'home'">Orange Six</p>
-      <i @click="$router.push('/category')"
-          class="search iconfont icon-search"></i>
-    </div>
+    <router-link to="'/'">
+      <div class="logo_name">
+        <i class="menu iconfont icon-caidan"></i>
+        <img v-show="$route.name !== 'home'"
+            src="../../assets/images/cat.png"/>
+        <p v-show="$route.name !== 'home'">Orange Six</p>
+        <i @click="$router.push('/category')"
+            class="search iconfont icon-search"></i>
+      </div>
+    </router-link>
   </div>
 </template>
 

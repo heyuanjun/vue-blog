@@ -1,6 +1,6 @@
 <template>
   <div id="message">
-    <marquee style="color:orange;"
+    <marquee style="color:orange;width: 90%;"
         direction="left">
       大家好，欢迎留言 😊
     </marquee>
