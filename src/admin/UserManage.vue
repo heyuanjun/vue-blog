@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import {HttpRequest, PostMessage} from '../components/NetWork/request'
+import {HttpRequest} from "@/request/api"
 
 export default {
   mounted() {
@@ -93,7 +93,7 @@ export default {
       });
     },
     deleteUser() {
-      PostMessage('/user/deleteUserInfo', {username: this.data6[this.index].username})
+      HttpRequest('/user/deleteUserInfo', {username: this.data6[this.index].username}, 'post')
           .then(res => {
             if (res.data.err == 0) {
               this.$Message.success(res.data.message)

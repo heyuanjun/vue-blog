@@ -9,8 +9,7 @@
           <div class="article-category">
             <Icon type="ios-bookmarks-outline" /> 简记
             <div class="article-num">
-              共
-              <span>{{count}}</span> 篇
+              共 <span>{{count}}</span> 篇
             </div>
           </div>
           <div class="card-left">
@@ -113,7 +112,7 @@
 </template>
 
 <script>
-import { getNoteDetail, PostMessage, PageSizeChange } from "../NetWork/request";
+import {HttpRequest} from "@/request/api";
 import CardItem from "./CardIItem";
 // import Music from "./Music";
 import moment from "moment";
@@ -170,11 +169,11 @@ export default {
   mounted() {
     /* 默认请求第一页 */
     this.PageChange(1);
-    getNoteDetail("/api/articles/recent").then(res => {
+    HttpRequest("/api/articles/recent").then(res => {
       this.navList = res.data.data;
     });
     this.getLabels();
-    this.getCategories();
+    // this.getCategories();
   },
   methods: {
     /* 防抖 */
@@ -184,7 +183,7 @@ export default {
     }, 800),
     // 搜索工具
     searchContent() {
-      PageSizeChange("/api/articles", { filter: this.likeSearch }).then(
+      HttpRequest("/api/articles", { filter: this.likeSearch }).then(
         res => {
           if (res.data.data.length > 0) {
             this.lists = res.data.data;
@@ -202,8 +201,8 @@ export default {
     },
     /* 获取标签 */
     getLabels() {
-      getNoteDetail("/api/labels").then(res => {
-        if (res.data.data.length > 0) {
+      HttpRequest("/api/labels").then(res => {
+        if (res.data.total > 0) {
           let arr = [];
           res.data.data.forEach(ele => {
             arr.push(ele.label);
@@ -215,7 +214,7 @@ export default {
     /* 获取标签详情 */
     getLabelInfo(label) {
       this.$Spin.show();
-      PostMessage("/api/labels/info", { label: label })
+      HttpRequest("/api/labels/info", { label: label })
         .then(res => {
           this.$Spin.hide();
           if (res.data) {
@@ -233,7 +232,7 @@ export default {
     },
     /* 获取分类 */
     getCategories() {
-      getNoteDetail("/api/categories")
+      HttpRequest("/api/categories")
         .then(res => {
           if (res.data.data.length > 0) {
             this.categoriesList = res.data.data;
@@ -248,7 +247,7 @@ export default {
     /* 获取分类详情页 */
     getCategoryInfo(category) {
       this.$Spin.show();
-      PostMessage("/api/categories/many", { category })
+      HttpRequest("/api/categories/many", { category })
         .then(res => {
           this.$Spin.hide();
           if (res.data) {
@@ -271,7 +270,7 @@ export default {
       this.lists.forEach(element => {
         if (element.id == id) {
           element.like_Star += 1;
-          PostMessage("/note/notelike", {
+          HttpRequest("/note/notelike", {
             likestar: element.like_Star,
             id: id
           }).then(res => {
@@ -291,7 +290,7 @@ export default {
     getInfo() {
       this.username = localStorage.getItem("username");
       if (this.username) {
-        PostMessage("/user/getuserInfo", { token: this.username }).then(res => {
+        HttpRequest("/user/getuserInfo", { token: this.username }).then(res => {
           if (res.data.err == 0) {
             this.MyInfo = res.data.Info[0];
           } else if (res.data.err == -998) {
@@ -306,12 +305,12 @@ export default {
         });
       }
     },
-    PageChange() {
+    PageChange(index) {
       this.$store.commit('LoadingTitleChange', {isshow: true, title: '正在加载文章内容,请稍等...'})
-      PageSizeChange("/api/articles", '').then(res => {
-        if (res.data.data.length > 0) {
-          this.count = res.data.data.count;
+      HttpRequest("/api/articles", {page: index}).then(res => {
+        if (res.data.total > 0) {
           this.lists = res.data.data;
+          this.count = res.data.total;
           console.log(this.lists)
         } else {
           this.$Message.error("网络出错了,(ノへ￣、)！");
@@ -327,7 +326,7 @@ export default {
       this.flag = !this.flag;
     },
     primaryInfo() {
-      PostMessage("/user/primaryInfo", {
+      HttpRequest("/user/primaryInfo", {
         token: this.username,
         Info: this.MyInfo.info,
         name: this.MyInfo.name,
@@ -381,7 +380,7 @@ export default {
         color: #333;
         span {
           color: orange;
-          font-size: 20px;
+          font-size: 15px;
         }
       }
     }

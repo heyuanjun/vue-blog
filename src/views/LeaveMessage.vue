@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import {PageSizeChange} from '@/components/NetWork/request'
+import {HttpRequest} from "@/request/api"
 import replyOrpublish from '../components/ReplyOrPublish/replyOrpublish'
 
 export default {
@@ -42,7 +42,7 @@ export default {
     PageChange() {
       /* 发起请求 */
       this.$store.commit('LoadingTitleChange', {isshow: true, title: '正在获取留言信息~'})
-      PageSizeChange('/api/messages').then(res => {
+      HttpRequest('/api/messages').then(res => {
         if (res.data.data.length > 0) {
           this.count = res.data.data.count
           this.arrMesasgeList = res.data.data

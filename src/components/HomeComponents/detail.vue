@@ -1,63 +1,83 @@
 <template>
   <div id="detail">
     <!-- 标题 -->
-    <header class="detail_header" :style="{color: Color}">
+    <header class="detail_header"
+        :style="{color: Color}">
       <h2 style="font-size:1.3rem">
         <i class="iconfont icon-lianjie"></i>
-        {{title}}
+        {{ title }}
       </h2>
       <!-- 时间 -->
       <h3 style="padding-top:1rem;">
-        <Icon type="ios-timer" />
-        {{time | dateFilter}}
+        <Icon type="ios-timer"/>
+        {{ time | dateFilter }}
       </h3>
       <!-- 标签 -->
       <div class="tags">
-        <Tag :color="bgColor[index]" v-for="(item,index) in lablesList" :key="index">{{item}}</Tag>
+        <Tag :color="bgColor[index]"
+            v-for="(item,index) in lablesList"
+            :key="index">{{ item }}
+        </Tag>
       </div>
       <!-- 绚丽小球 -->
       <div class="ball">
-            <span :style="{background: ballColor[index]}" v-for="(item, index) in 3" :key="index"></span>
+        <span :style="{background: ballColor[index]}"
+            v-for="(item, index) in 3"
+            :key="index"></span>
       </div>
     </header>
     <!-- 需要渲染的html -->
     <Row>
-      <Col :xl="3" :lg="2" :md="2" :sm="0" :xs="0">
+      <Col :xl="3"
+          :lg="2"
+          :md="2"
+          :sm="0"
+          :xs="0">
         <p style="padding:1rem;font-family:cursive;">.</p>
       </Col>
-      <Col :xl="18" :lg="20" :md="20" :sm="24" :xs="24">
+      <Col :xl="18"
+          :lg="20"
+          :md="20"
+          :sm="24"
+          :xs="24">
         <div class="markdown-body">
-          <div ref="content" class="renderNav" v-html="html"></div>
+          <div ref="content"
+              class="renderNav"
+              v-html="html"></div>
         </div>
         <div class="detail_share">
           <span :style="{color: Color}">分享文章:</span>
           <Tooltip
-            v-for="(item, index) in shareIcon"
-            :key="index"
-            :placement="item.direction"
-            :content="item.content"
+              v-for="(item, index) in shareIcon"
+              :key="index"
+              :placement="item.direction"
+              :content="item.content"
           >
-            <i @click="ArticleShare(index)" :class="item.icon"></i>
+            <i @click="ArticleShare(index)"
+                :class="item.icon"></i>
           </Tooltip>
-          <QrcodeVue v-show="qrcode" class="erweima" :value="detailURL" />
+          <QrcodeVue v-show="qrcode"
+              class="erweima"
+              :value="detailURL"/>
         </div>
         <reply-orpublish
-          :messageData="arrMesasgeList"
-          publishURL="/note/accessPulish"
-          replyURL="/note/replyInfo"
+            :messageData="arrMesasgeList"
+            publishURL="/note/accessPulish"
+            replyURL="/note/replyInfo"
         />
       </Col>
     </Row>
   </div>
 </template>
 <script>
-import { getNoteDetail, PostMessage } from "../NetWork/request";
 import highlight from "highlight.js";
 import marked from "marked";
 import "highlight.js/styles/monokai-sublime.css";
 import QrcodeVue from "qrcode.vue";
 import replyOrpublish from "../ReplyOrPublish/replyOrpublish";
 import moment from "moment";
+import {HttpRequest} from "@/request/api";
+
 export default {
   name: "detail",
   data() {
@@ -81,7 +101,7 @@ export default {
           icon: "iconfont icon-weixin",
           direction: "bottom"
         },
-        { content: "分享到QQ", icon: "iconfont icon-qq", direction: "top" },
+        {content: "分享到QQ", icon: "iconfont icon-qq", direction: "top"},
         {
           content: "分享到QQ空间",
           icon: "iconfont icon-qzone",
@@ -89,7 +109,7 @@ export default {
         }
       ],
       qrcode: false,
-      ballColor:['orangered', 'yellow', 'lightgreen']
+      ballColor: ['orangered', 'yellow', 'lightgreen']
     };
   },
   filters: {
@@ -97,11 +117,11 @@ export default {
       return moment(val).format("YYYY-MM-DD");
     }
   },
-  components: { QrcodeVue, replyOrpublish },
+  components: {QrcodeVue, replyOrpublish},
   mounted() {
     this.lightEdite();
     this.$Spin.show();
-    getNoteDetail(`/api/articles/${this.$route.params.id}/detail`).then(res => {
+    HttpRequest(`/api/articles/${this.$route.params.id}/detail`).then(res => {
       const data = res.data;
       this.html = marked(data.content);
       this.share_brief = data.article_brief;
@@ -143,7 +163,7 @@ export default {
       });
       /* 初始化marked颜色高亮 */
       marked.setOptions({
-        highlight: function(code) {
+        highlight: function (code) {
           return highlight.highlightAuto(code).value;
         }
       });
@@ -179,7 +199,7 @@ export default {
             article_id: article_id,
             access_content: that.value
           };
-          PostMessage("/note/accessPulish", obj).then(res => {
+          HttpRequest("/note/accessPulish", obj, 'post').then(res => {
             if (res.data.err == 0) {
               this.$Message.success("发表成功!");
               setTimeout(() => {
@@ -199,8 +219,10 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss"
+    scoped>
 @import url("../../assets/css/detail.css");
+
 #detail {
   .detail_share {
     position: relative;
@@ -209,6 +231,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+
     .erweima {
       position: absolute;
       top: -130px;
@@ -217,10 +240,12 @@ export default {
       border-radius: 0.1rem;
       border: 1px solid #ccc;
     }
+
     span {
       color: #333;
       margin-right: 1rem;
     }
+
     i {
       padding: 0.6rem 0.63rem;
       border-radius: 50%;
@@ -229,62 +254,77 @@ export default {
       cursor: pointer;
       transition: all 0.6s;
     }
+
     i.icon-weibo {
       border: 1px solid rgb(255, 153, 0);
       color: rgb(255, 153, 0);
     }
+
     i.icon-weibo:hover {
       background: rgb(255, 153, 0);
       color: white;
     }
+
     i.icon-weixin {
       border: 1px solid lightgreen;
       color: lightgreen;
     }
+
     i.icon-weixin:hover {
       background: lightgreen;
       color: white;
     }
+
     i.icon-qq {
       border: 1px solid skyblue;
       color: skyblue;
     }
+
     i.icon-qq:hover {
       background: skyblue;
       color: white;
     }
+
     i.icon-qzone {
       border: 1px solid yellow;
       color: yellow;
     }
+
     i.icon-qzone:hover {
       background: yellow;
       color: white;
     }
   }
+
   .detail_header {
     height: 20rem;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-      .ball {
-        margin-top: 1rem;
-        span {
-          display: inline-block;
-          width: 12px;height: 12px;
-          border-radius: 50%;
-          margin: 0 0.2rem;
-        }
+
+    .ball {
+      margin-top: 1rem;
+
+      span {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin: 0 0.2rem;
+      }
     }
+
     .tags {
       margin-top: 0.5rem;
     }
   }
 }
+
 .btn {
   margin: 1rem;
 }
+
 .renderNav {
   border-top: 1.5px dashed lightgreen;
   border-left: 1.5px dashed skyblue;

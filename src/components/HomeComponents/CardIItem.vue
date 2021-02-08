@@ -2,24 +2,29 @@
   <div id="carditem">
     <div class="md-title">
       <!-- md尺寸的小球 -->
-      <div class="right-around md-ball">
-        <span :style="{background: ballColor[index]}"
-            v-for="(item, index) in 3"
-            :key="index"></span>
-      </div>
+      <!--<div class="right-around md-ball">-->
+      <!--  <span :style="{background: ballColor[index]}"-->
+      <!--      v-for="(item, index) in 3"-->
+      <!--      :key="index"></span>-->
+      <!--</div>-->
       <p class="title"><i class="iconfont icon-lianjie"></i> {{ title }}</p>
     </div>
     <img @click="detailPage(article_id)"
         :src="Itemimg"
+        v-if="Itemimg"
+        alt="封面">
+    <img @click="detailPage(article_id)"
+        src="../../assets/images/notFindImg.jpeg"
+        v-if="!Itemimg"
         alt="封面">
     <Card :contentid="id"
         class="card">
       <!-- xl尺寸显示的三个小球 -->
-      <div class="right-around xl-ball">
-        <span :style="{background: ballColor[index]}"
-            v-for="(item, index) in 3"
-            :key="index"></span>
-      </div>
+      <!--<div class="right-around xl-ball">-->
+      <!--  <span :style="{background: ballColor[index]}"-->
+      <!--      v-for="(item, index) in 3"-->
+      <!--      :key="index"></span>-->
+      <!--</div>-->
       <!-- 文章标题 -->
       <p class="title"><i class="iconfont icon-lianjie"></i> {{ title }}</p>
       <!-- 文章简介 -->
@@ -27,26 +32,27 @@
           class="content"></p>
       <!-- 文章发布时间，点赞数，访问量 -->
       <div class="article-item-icon">
-        <div class="access_me"><img src="../../assets/images/swiper1.jpeg"
-            alt="">
-          <p>磊崽</p></div>
-        <p class="publictime">
+        <div class="access-me">
+          <img src="../../assets/images/six.jpg">
+          <p></p>
+        </div>
+        <p class="public-time">
           <Icon type="ios-clock-outline"/>
           {{ time | timeFilter }}
         </p>
         <p class="box">
           <i @click="likeArticle(id)"
               class="iconfont icon-dianzan"
-              :class="{likeStyle:liked(id)}"
-          ></i>
-          </span><span style="margin-right:0.5rem">{{ like }}</span>
+              :class="{likeStyle:liked(id)}">
+          </i>
+          <span style="margin-right:0.5rem">{{ like }}</span>
           <i class="iconfont icon-pinglun"></i><span>{{ accessPulish_count }}</span>
           <i class="iconfont icon-fangwen"></i><span>{{ visited }}</span>
         </p>
       </div>
       <!-- 文章标签 -->
       <div class="tags">
-        <Tag color="cyan">{{ category }}</Tag>
+        <Tag color="cyan" v-if="category">{{ category }}</Tag>
         <Tag :color="bgColor[index]"
             v-for="(item,index) in labelsList"
             :key="index">{{ item }}
@@ -194,13 +200,15 @@ export default {
       display: flex;
       align-items: center;
       padding: 1rem 0;
+      height: 4rem;
+      line-height: 4rem;
 
-      .publictime {
+      .public-time {
         white-space: nowrap;
         margin-left: 3rem;
       }
 
-      .access_me {
+      .access-me {
         text-align: center;
         padding-top: 1rem;;
         font-size: .8rem;

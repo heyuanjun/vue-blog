@@ -16,7 +16,8 @@
 </template>
 
 <script>
-import { getNoteDetail } from "../NetWork/request";
+import {HttpRequest} from "@/request/api";
+
 export default {
   name: "music",
   data() {
@@ -33,7 +34,7 @@ export default {
 
   methods: {
     getMusic(id) {
-      getNoteDetail(`/api/music/${id}`).then(res => {
+      HttpRequest(`/api/music/${id}`).then(res => {
         if (res) {
           this.music_link = `//music.163.com/outchain/player?type=2&id=${res.music_id}&auto=0&height=66`;
           this.music_index = res.id;

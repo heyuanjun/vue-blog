@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import {PostMessage} from "@/components/NetWork/request";
+import {HttpRequest} from "@/request/api";
 import {mapMutations} from "vuex";
 
 export default {
@@ -119,7 +119,7 @@ export default {
       if (!this.pass || !this.email) {
         this.$Message.error("请输入邮箱和密码!");
       } else {
-        PostMessage("/admin/login", {email: this.email, password: this.pass,})
+        HttpRequest("/admin/login", {email: this.email, password: this.pass}, 'post')
             .then(res => {
               if (res.status === 200) {
                 this.userToken = 'Bearer ' + res.data.access_token;

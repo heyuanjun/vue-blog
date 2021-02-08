@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import {getNoteDetail} from '../components/NetWork/request'
+import {HttpRequest} from "@/request/api"
 
 export default {
   name: 'articleEditor',
@@ -77,7 +77,7 @@ export default {
       this.ModelisShow = true
     },
     handleLoginOut() {
-      getNoteDetail('/user/adminExit').then(res => {
+      HttpRequest('/user/adminExit').then(res => {
         this.$Message.success(res.data.message);
         location.reload()
       })

@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import {HttpRequest} from '@/components/NetWork/request'
+import {HttpRequest} from "@/request/api"
 
 export default {
   name: 'articlePublish',

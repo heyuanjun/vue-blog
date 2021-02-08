@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import {PostMessage} from '../NetWork/request'
+import {HttpRequest} from "@/request/api"
 import moment from 'moment'
 
 export default {
@@ -142,7 +142,7 @@ export default {
       if (!token) return this.$Message.error('您还没有登陆呢！')
       if (!this.replyValue) return this.$Message.error('内容不能为空呀,请输入内容！')
       this.replyInfo.replyValue = this.replyValue
-      PostMessage(this.replyURL, {replyInfo: this.replyInfo, token: token})
+      HttpRequest(this.replyURL, {replyInfo: this.replyInfo, token: token}, 'post')
           .then(res => {
             if (res.data.err === 0) {
               this.$Message.success(res.data.message)
@@ -180,7 +180,7 @@ export default {
           }
           /* leave message end */
 
-          PostMessage(this.publishURL, this.obj)
+          HttpRequest(this.publishURL, this.obj, 'post')
               .then(res => {
                 if (res.data) {
                   this.$Message.success('留言成功')
