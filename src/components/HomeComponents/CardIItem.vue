@@ -101,6 +101,7 @@ export default {
     }
   },
   data() {
+    console.log(this.$props)
     return {
       flag: true,
       bgColor: ['magenta', 'blue', 'red', 'cyan', 'volcano', 'yellow'],
